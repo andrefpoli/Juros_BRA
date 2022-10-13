@@ -21,11 +21,11 @@ hc_plot_ft <- function(
              labels    = list(color ="black",style = list(fontSize = "12px"))
     )%>%
     hc_yAxis(
-      labels    = list(color ="black",format = "{value}%",style = list(fontSize = "14px")),
+      labels    = list(color ="black",format = "{value:.2f}%",style = list(fontSize = "12px")),
       title     = FALSE,
       plotLines = list(
         list(
-          value = 0,
+          value = 1,
           color = "#0D0808",
           width = 1
         )

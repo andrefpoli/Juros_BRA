@@ -60,18 +60,18 @@ df_di1_futures <- df_di1 |>
     maturity_date = maturity2date(maturity_code),
     fixing = following(maturity_date, "Brazil/ANBIMA"),
     business_days = bizdays(refdate, fixing, "Brazil/ANBIMA"),
-    adjusted_tax = implied_rate("discrete", business_days / 252, 100000 / price)
+    adjusted_tax = round(implied_rate("discrete", business_days / 252, 100000 / price),4)
   ) |>
   filter(business_days > 0)
 
 df_ft <- df_di1_futures %>%
-  hchart("line", hcaes(x = business_days, y = adjusted_tax, group = refdate), color = colors[c("blue_ft","marrom_ft")]) %>%
+  hchart("line", hcaes(x = business_days, y = 100*adjusted_tax, group = refdate), color = colors[c("blue_ft","marrom_ft")]) %>%
   hc_plot_ft(
     title     = "CURVAS PRE",
     subtitle  = "Accumulated growth rate in 4 quarters",
     source    = "IBGE",
     range     = FALSE,
-    navigator = FALSE
+    navigator = TRUE
   )
 df_ft
 
